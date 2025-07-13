@@ -1,10 +1,23 @@
 
 import os
 import json
-from backend import *
+import logging
+from collections import defaultdict
+
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
 ImgFolderPath = ""
 
-with open("hashes.json", "r") as hashes_json:
-    hashes = json.dumps(hashes_json)
-    print(hashes)
+def CollectJsonItems(lst: list):
+    res = defaultdict(list)
+    for d in lst:
+        for k, v in d.items():
+            res[k].append(v)
+
+    HashList_avg = res['hash_avg']
+    return HashList_avg
+
+
+with open("hashes.json", "r") as file:
+    hashes_json = json.load(file)
+    HashList_avg = CollectJsonItems(hashes_json['all_hashes']) 

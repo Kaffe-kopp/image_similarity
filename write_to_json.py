@@ -16,16 +16,15 @@ with open("hashes.json", "r+") as file:
     hashes_json = json.load(file)
     for img in ImgFolder:
         if img in [i['name'] for i in hashes_json['all_hashes']]:
-            logging.debug(f'{img} already exists\n')
+            logging.debug(f'{img} already exists')
             continue
         name = img
-        series_num = None
-    # add logic here
+        #series_num = None _p0 _p1 etc
         hash_avg = imagehash.average_hash(Image.open(f"{ImgFolderPath}/{img}"))
 
         img_data = {
             "name": name,
-            "series_num": series_num,
+            #"series_num": series_num,
             "hash_avg": str(hash_avg)
             #add more hashes uwu plz
         }
