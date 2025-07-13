@@ -3,6 +3,9 @@ import os
 import json
 from PIL import Image
 import imagehash
+import logging
+
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
 ImgFolderPath = "to_convert"
 
@@ -12,7 +15,9 @@ ImgFolder = os.listdir(ImgFolderPath)
 with open("hashes.json", "r+") as file:
     hashes_json = json.load(file)
     for img in ImgFolder:
-        if img in [i['name'] for i in hashes_json['all_hashes']]: continue
+        if img in [i['name'] for i in hashes_json['all_hashes']]:
+            logging.debug(f'{img} already exists\n')
+            continue
         name = img
         series_num = None
     # add logic here
